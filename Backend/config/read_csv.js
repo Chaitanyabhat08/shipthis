@@ -1,10 +1,19 @@
 const fs = require('fs');
 const csv = require('csv-parser');
-const { client } = require('./db');
+const { MongoClient } = require('mongodb');
+const uri = 'mongodb+srv://chaish:ckgtWIOanhv0H1cT@cluster0.esitssu.mongodb.net/?retryWrites=true&w=majority';
+const client = new MongoClient(uri);
+
+async function connect() {
+  await client.connect();
+  console.log('Connected to MongoDB');
+}
+
+connect();
 
 async function importCSVToMongoDB() {
   const database = client.db('shipthis');
-  const collection = database.collection('Movies');
+  const collection = database.collection('movies');
 
   fs.createReadStream('./netflix_titles.csv')
     .pipe(csv())
@@ -12,7 +21,7 @@ async function importCSVToMongoDB() {
       // Manipulate the data as needed before inserting into MongoDB
       const transformedData = {
         id: data.show_id,
-        type: data.type,
+        showtype: data.showtype,
         title: data.title,
         director: data.director,
         cast: data.cast,

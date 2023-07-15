@@ -1,5 +1,11 @@
 const mongoose = require('mongoose');
 const validator = require('validator');
+const { default: isEmail } = require('validator/lib/isEmail');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
+const { config } = require('dotenv');
+const { resolve } = require('path');
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -17,11 +23,6 @@ const userSchema = new mongoose.Schema({
     required: [true, 'Please enter email address'],
     unique: true,
     validate: [validator.isEmail, "Please enter a valid email address"],
-  },
-  phoneNumber: {
-    type: Number,
-    default: 9999999999,
-    minLength: [10, "Please enter a valid phone number"]
   },
   password: {
     type: String,

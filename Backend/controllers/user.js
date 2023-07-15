@@ -11,21 +11,18 @@ dotenv.config({ path: '../config/.env' });
 
 //Register a user
 module.exports.registerUser = catchAsyncError(async (req, res, next) => {
-  console.log('heyeyeyyey');
-  const { userData } = req.body;
-  console.log("userrr", userData);
-  const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+  const { age, name, email, password, avatar } = req.body;
+  const myCloud = await cloudinary.v2.uploader.upload(avatar, {
     folder: "avatars",
     width: 150,
     crop: "scale",
   });
-
-  const { name, email, password } = req.body;
   const existing = await userModel.findOne({ email });
   if (existing) {
     return next(new ErrorHandler("User already exists,Please Login", 11000));
   }
   const user = await userModel.create({
+    age,
     name,
     email,
     password,
@@ -52,11 +49,12 @@ module.exports.loginUser = async (req, res, next) => {
     if (!isPasswordMatched) {
       return next(new ErrorHandler("Invalid Password or Email", 401));
     }
-    sendToken(user, 200, res);
+    sendToken(user, 200, res); // Set the token as a cookie in the response
   } catch (error) {
     return next(new ErrorHandler(error));
   }
 };
+
 
 module.exports.logoutUser = catchAsyncError(async (req, res, next) => {
   res.cookie("token", null, {
@@ -83,14 +81,14 @@ module.exports.forgotPassword = catchAsyncError(async (req, res, next) => {
   html.push(`<button style="background-color:white"><a href=${resetPasswordUrl}>Reset Password Link</a></button>`)
   html.push(`<p>${message}</p>`);
   html.push(`<p>Thanks and Regards</p>`);
-  html.push(`<p>Saints&Sinners</p>`);
+  html.push(`<p>Moive app</p>`);
   html.push(`<tr><img src="./man.png" alt="s&s"></tr>`)
 
   html = html.join('');
   try {
     await sendEmail({
       email: user.email,
-      subject: `Password Recovery Email for your S&S account`,
+      subject: `Password Recovery Email`,
       html,
     });
     res.status(200).json({

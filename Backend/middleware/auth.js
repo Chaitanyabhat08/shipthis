@@ -11,6 +11,7 @@ if (result.error) {
 }
 
 module.exports.isAuthenticatedUser = catchAsyncError(async (req, res, next) => {
+  console.log("this is cookies", req.cookies);
   const { token } = req.cookies;
   if (!token) {
     return next(new ErrorHandler("Please login or signup to access this page"));
