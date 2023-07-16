@@ -28,8 +28,13 @@ import axios from 'axios';
 export const Login = (email, password) => async (dispatch) => {
   try {
     dispatch({ type: LOGIN_REQUEST });
-    const config = { headers: { "Content-type": "application/json" } }
+    const config = {
+      headers: {
+        "Content-Type": "application/json"
+      },
+    } 
     const { data } = await axios.post(`http://localhost:4000/api/v1/users/loginUser`, { email, password }, config);
+    document.cookie = `token=${data.token}`;
     dispatch({ type: LOGIN_SUCCESS, payload: data.user })
   } catch (error) {
     dispatch({ type: LOGIN_FAILURE, payload: error.response.data.message });
