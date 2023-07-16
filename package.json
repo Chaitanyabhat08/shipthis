@@ -25,10 +25,14 @@
     "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.3",
     "nodemon": "^3.0.1",
+    "overlay-navbar": "^1.2.3",
     "react-alert-template-basic": "^1.0.2",
+    "react-icons": "^4.10.1",
+    "react-js-pagination": "^3.0.3",
     "redux": "^4.2.1",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.4.2",
+    "replace-js-pagination": "^1.0.5",
     "shortid": "^2.2.16",
     "validator": "^13.9.0"
   }

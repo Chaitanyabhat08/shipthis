@@ -38,12 +38,12 @@
 
 import React, { Fragment, useRef, useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import MetaData from '../../layout/MetaData';
+import MetaData from '../layout/MetaData';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useLocation } from "react-router-dom";
 import { clearErrors, Login, Register } from '../../actions/userAction';
 import './loginSignup.css';
-import Loader from '../../layout/Loader';
+import Loader from '../layout/Loader';
 
 const LoginSignup = () => {
   const dispatch = useDispatch();

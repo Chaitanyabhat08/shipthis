@@ -1,7 +1,6 @@
 import { MOVIES_FAILURE, MOVIES_REQUEST, MOVIES_SUCCESS,CLEAR_ERRORS } from "../constants/movieConstants";
 
 export const moviesReducer = (state = { movies: [] }, action) => {
-  console.log(action.payload);
   switch (action.type) {
     case MOVIES_REQUEST:
       return {
@@ -12,8 +11,9 @@ export const moviesReducer = (state = { movies: [] }, action) => {
       return {
         loading: false,
         movies: action.payload.allmovies,
-        moviescount: action.payload.moviescount,
+        moviescount: action.payload.moviesCount,
         resultPerPage: action.payload.resultPerPage,
+        filteredMoviesCount: action.payload.filteredMoviesCount,
       }
     case MOVIES_FAILURE:
       return {
