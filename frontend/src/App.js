@@ -5,6 +5,7 @@ import LoginSignup from './components/User/loginSignup';
 import AllMovies from './components/Movies/AllMovies.js';
 import { useSelector, useDispatch } from 'react-redux';
 import Search from "./components/Search/Search.js"
+import MovieDetails from './components/Movies/MovieDetails.js'
 
 function App() {
   const { isAuthenticated, user } = useSelector(state => state.user);
@@ -17,6 +18,7 @@ function App() {
         <Route path="/signin" element={<LoginSignup />} />
         <Route path="/allMovies" element={<AllMovies />} />
         <Route path="/allMovies/:keyWord" element={<AllMovies />} />
+        <Route path="/movies/:id" element={<MovieDetails />} />
       </Routes>
     </Router>
   );

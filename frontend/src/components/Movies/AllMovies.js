@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../layout/Loader';
 import Pagination from 'replace-js-pagination';
 import { Link, useParams, useNavigate } from 'react-router-dom';
-import moviePic from '../../images/500-5002380_icon-film-film-icon-hd-png-download.png';
+import moviePic from '../../images/card.webp';
 
 const AllMovies = () => {
   const dispatch = useDispatch();
@@ -62,7 +62,7 @@ const AllMovies = () => {
                   <div class="card-body">
                     <h5 class="card-title">{movie.title}</h5>
                     <p class="card-text">{movie.showtype}</p>
-                    <Link to={`/movies/${movie.id}`}>
+                    <Link to={`/movies/id=${movie._id}`}>
                       <button type="button" class="btn btn-dark">Quick view</button>
                     </Link>
                  
@@ -78,7 +78,7 @@ const AllMovies = () => {
                 <Pagination
                   activePage={currentPage}
                   itemsCountPerPage={15}
-                  totalItemsCount={moviescount}
+                  totalItemsCount={filteredMoviesCount}
                   onChange={(pageNumber) => setCurrentPageNo(pageNumber)}
                   nextPageText="Next"
                   prevPageText="Previous"

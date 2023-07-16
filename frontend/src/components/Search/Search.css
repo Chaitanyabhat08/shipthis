@@ -42,6 +42,15 @@
     border-radius: 40px;
     cursor: pointer;
 }
+.searchBox > a > input[type="submit"] {
+    width: 80px;
+    height: 80px;
+    color: black;
+    background-color: transparent;
+    margin:4px;
+    border-radius: 40px;
+    cursor: pointer;
+}
 .searchBox:hover i{
     opacity: 0;
 }

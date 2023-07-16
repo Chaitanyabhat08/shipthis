@@ -1,7 +1,8 @@
 import React, { Fragment, useState } from 'react';
 import './Search.css';
-import { useNavigate } from "react-router-dom";
+import { useNavigate,Link } from "react-router-dom";
 import MetaData from '../layout/MetaData';
+
 
 const Search = () => {
   const [keyWord, setKeyword] = useState("");
@@ -21,6 +22,9 @@ const Search = () => {
       <form className="searchBox" onSubmit={searchSubmitHandler}>
         <input type='text' placeholder="Search your show" onChange={(e) => setKeyword(e.target.value)} />
         <input type='submit' value="Search" />
+        <Link to="/allMovies">
+          <input type='submit' value="Cancel" />
+        </Link>
       </form>
     </Fragment>
   )

@@ -9,7 +9,7 @@ module.exports.getAllMovies = catchAsyncError(async (req, res, next) => {
   apiFeature.pagination(resultPerPage);
   const allmovies = await apiFeature.query;
   const moviesCount = await movieModel.countDocuments();
-  const filteredMoviesCount = allmovies.length;
+  const filteredMoviesCount = await countMoviesWithKeyword(req.query.keyWord); // New method to count movies with the keyword
 
   res.status(201).send({
     success: true,
@@ -19,3 +19,8 @@ module.exports.getAllMovies = catchAsyncError(async (req, res, next) => {
     filteredMoviesCount,
   });
 });
+
+async function countMoviesWithKeyword(keyword) {
+  const count = await movieModel.countDocuments({ title: { $regex: keyword, $options: "i" } });
+  return count;
+}
