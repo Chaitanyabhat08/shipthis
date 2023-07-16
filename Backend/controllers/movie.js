@@ -5,12 +5,15 @@ const mongoose = require('mongoose');
 
 module.exports.getAllMovies = catchAsyncError(async (req, res, next) => {
   const resultPerPage = 15;
-  const { keyWord, category } = req.query;
-
+  const { keyWord, category, age } = req.query;
   const query = movieModel.find();
 
   if (category && category !== 'All') {
     query.where('showtype').equals(category);
+  }
+
+  if (age && Number(age) < 18) {
+    query.where('rating').ne('R');
   }
 
   const apiFeature = new ApiFeatures(query, req.query).search();
@@ -31,7 +34,6 @@ module.exports.getAllMovies = catchAsyncError(async (req, res, next) => {
 
 module.exports.getMoviesById = catchAsyncError(async (req, res, next) => {
   const { id } = req.query;
-console.log(id);
   if (!mongoose.isValidObjectId(id)) {
     return res.status(400).send({ success: false, message: 'Invalid movie ID' });
   }

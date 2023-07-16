@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { getMovies } from '../../actions/moviesAction';
+import { getMovies,clearErrors } from '../../actions/moviesAction';
 import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../layout/Loader';
 import { useAlert } from 'react-alert';
@@ -16,15 +16,20 @@ const AllMovies = () => {
   const [category, SetCategory] = useState('All');
   const { keyWord } = useParams();
   const history = useNavigate();
-
+  const { loading, movies, moviescount, resultPerPage, filteredMoviesCount, error } = useSelector((state) => state.movies);
+  const { user } = useSelector((state) => state.user);
   useEffect(() => {
     if (isMounted.current) {
-      dispatch(getMovies(keyWord, currentPage,category));
+      dispatch(getMovies(keyWord,currentPage,category,user.age));
+    }
+    if (error) {
+      alert.show(error);
+      dispatchEvent(clearErrors());
     }
     return () => {
       isMounted.current = false; // Set the ref to false when component unmounts
     };
-  }, [dispatch, keyWord, currentPage,category]);
+  }, [dispatch, keyWord, error,alert, currentPage,category, user]);
 
   const setCurrentPageNo = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -47,8 +52,6 @@ const AllMovies = () => {
     alert.show("Logged out Successfully!");
   }
 
-  // const { user, isAuthenticated } = useSelector((state) => state.user);
-  const { loading, movies, moviescount, resultPerPage, filteredMoviesCount } = useSelector((state) => state.movies);
   return (
     <>
       {loading && filteredMoviesCount ? (

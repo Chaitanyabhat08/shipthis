@@ -215,7 +215,7 @@ const LoginSignup = () => {
               Login
             </button>
           </form>
-          <Link to="/users/forgotPassword">Forgot Password?</Link>
+          <Link to="/forgotPassword">Forgot Password?</Link>
         </div>
       </div>
     </div>
