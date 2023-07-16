@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { getMovies } from '../../actions/moviesAction';
 import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../layout/Loader';
+import { useAlert } from 'react-alert';
 import Pagination from 'replace-js-pagination';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import moviePic from '../../images/card.webp';
@@ -9,6 +10,7 @@ import { LogOutUser } from '../../actions/userAction';
 
 const AllMovies = () => {
   const dispatch = useDispatch();
+  const alert = useAlert();
   const isMounted = useRef(true); // Ref to check if component is mounted
   const [currentPage, setCurrentPage] = useState(1);
   const [category, SetCategory] = useState('All');
@@ -17,33 +19,36 @@ const AllMovies = () => {
 
   useEffect(() => {
     if (isMounted.current) {
-      dispatch(getMovies(keyWord, currentPage));
+      dispatch(getMovies(keyWord, currentPage,category));
     }
     return () => {
       isMounted.current = false; // Set the ref to false when component unmounts
     };
-  }, [dispatch, keyWord, currentPage]);
+  }, [dispatch, keyWord, currentPage,category]);
 
   const setCurrentPageNo = (pageNumber) => {
     setCurrentPage(pageNumber);
     dispatch(getMovies(keyWord, pageNumber));
   };
   const handlecategory = (e) => {
-    console.log(e.target.value);
-    SetCategory(e.target.value);
-  }
+    const newCategory = e.target.value;
+    SetCategory(newCategory);
+    dispatch(getMovies(keyWord, currentPage, newCategory));
+  };
+
   const clearSearch = () => {
     setCurrentPage(1);
     dispatch(getMovies('', 1));
     history('/allMovies');
   };
   const handleLogout = async () => { 
-    dispatch(LogOutUser());
+    await dispatch(LogOutUser());
+    history('/signin');
+    alert.show("Logged out Successfully!");
   }
 
-  const { user, isAuthenticated } = useSelector((state) => state.user);
+  // const { user, isAuthenticated } = useSelector((state) => state.user);
   const { loading, movies, moviescount, resultPerPage, filteredMoviesCount } = useSelector((state) => state.movies);
-  let count = filteredMoviesCount;
   return (
     <>
       {loading && filteredMoviesCount ? (
@@ -65,15 +70,15 @@ const AllMovies = () => {
                 id="selectId"
                 required
                 value={category}
-                onChange={(e) => SetCategory(e.target.value)}
+                onChange={(e) => handlecategory(e)}
               >
                 <option value="All">ALL</option>
-                <option value="TVSH">TV SHOWS</option>
-                <option value="MOVS">MOVIES</option>
+                <option value="TV Show">TV SHOWS</option>
+                <option value="Movie">MOVIES</option>
                 </select>
               </div>
               <div>
-                <button type="button" className="btn btn-dark" onClick={() => handleLogout}>Logout</button>
+                <button type="button" className="btn btn-dark" onClick={handleLogout}>Logout</button>
               </div>
             </div>
             {

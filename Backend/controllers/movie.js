@@ -4,13 +4,21 @@ const ApiFeatures = require('../utils/ApiFeatures');
 const mongoose = require('mongoose');
 
 module.exports.getAllMovies = catchAsyncError(async (req, res, next) => {
-  console.log(req.query);
   const resultPerPage = 15;
-  const apiFeature = new ApiFeatures(movieModel.find(), req.query).search();
+  const { keyWord, category } = req.query;
+
+  const query = movieModel.find();
+
+  if (category && category !== 'All') {
+    query.where('showtype').equals(category);
+  }
+
+  const apiFeature = new ApiFeatures(query, req.query).search();
+
   apiFeature.pagination(resultPerPage);
-  const allmovies = await apiFeature.query;
+  const allmovies = await apiFeature.query.exec();
   const moviesCount = await movieModel.countDocuments();
-  const filteredMoviesCount = await countMoviesWithKeyword(req.query.keyWord); // New method to count movies with the keyword
+  const filteredMoviesCount = await countMoviesWithKeyword(keyWord);
 
   res.status(201).send({
     success: true,

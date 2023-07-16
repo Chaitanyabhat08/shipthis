@@ -8,9 +8,12 @@ const reducer = combineReducers({
   movies:moviesReducer,
 });
 
+let initialState = {};
+
 const middleWare = [thunk];
 const store = createStore(
   reducer,
+  initialState,
   composeWithDevTools(applyMiddleware(...middleWare))
 );
 

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './components/Home/Home.js';
 import LoginSignup from './components/User/loginSignup';
 import AllMovies from './components/Movies/AllMovies.js';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Search from "./components/Search/Search.js"
 import MovieDetails from './components/Movies/MovieDetails.js'
 import Store from './store.js';
@@ -25,11 +25,11 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/Search" element={<Search/>} />
+        {user && isAuthenticated && <Route path="/Search" element={<Search />} />}
         <Route path="/signin" element={<LoginSignup />} />
-        <Route path="/allMovies" element={<AllMovies />} />
-        <Route path="/allMovies/:keyWord" element={<AllMovies />} />
-        <Route path="/movies/:id" element={<MovieDetails />} />
+        {user && isAuthenticated && <Route path="/allMovies" element={<AllMovies />} />}
+        {user && isAuthenticated && <Route path="/allMovies/:keyWord" element={<AllMovies />} />}
+        {user && isAuthenticated && <Route path="/movies/:id" element={<MovieDetails />} />}
       </Routes>
     </Router>
   );

@@ -33,8 +33,8 @@ export const Login = (email, password) => async (dispatch) => {
         "Content-Type": "application/json"
       },
     } 
-    const { data } = await axios.post(`http://localhost:4000/api/v1/users/loginUser`, { email, password }, config);
-    document.cookie = `token=${data.token}`;
+    const { data } = await axios.post(`/api/v1/users/loginUser`, { email, password }, config);
+    // document.cookie = `token=${data.token}`;
     dispatch({ type: LOGIN_SUCCESS, payload: data.user })
   } catch (error) {
     dispatch({ type: LOGIN_FAILURE, payload: error.response.data.message });
@@ -45,7 +45,8 @@ export const Register = (userData) => async (dispatch) => {
   try {
     dispatch({ type: REGISTER_USER_REQUEST });
     const config = { headers: { 'Content-Type': 'application/json' } }
-    const { data } = await axios.post(`http://localhost:4000/api/v1/users/registerUser`, userData, config);
+    const { data } = await axios.post(`/api/v1/users/registerUser`, userData, config);
+    // document.cookie = `token=${data.token}`;
     dispatch({ type: REGISTER_USER_SUCCESS, payload: data.user })
   } catch (error) {
     dispatch({ type: REGISTER_USER_FAILURE, payload: error.response.data.message });
