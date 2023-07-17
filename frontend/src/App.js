@@ -11,7 +11,8 @@ import Store from './store.js';
 import { LoadUser } from './actions/userAction.js';
 import ForgotPasswordOption from './components/User/ForgotPasswordOption.js';
 import ResetPasswordOption from './components/User/ResetPasswordOption.js';
-
+import Header from './components/layout/Header/Header.js';
+import AboutUs from './components/User/AboutUs.js';
 function App() {
   useEffect(() => {
     WebFont.load({
@@ -23,8 +24,9 @@ function App() {
   }, []);
   const { isAuthenticated, user } = useSelector(state => state.user);
 
-  return (
+  return (<>
     <Router>
+      <Header/>
       <Routes>
         <Route path="/" element={<Home />} />
         {user && isAuthenticated && <Route path="/Search" element={<Search />} />}
@@ -32,10 +34,12 @@ function App() {
         {user && isAuthenticated && <Route path="/allMovies" element={<AllMovies />} />}
         {user && isAuthenticated && <Route path="/allMovies/:keyWord" element={<AllMovies />} />}
         {user && isAuthenticated && <Route path="/movies/:id" element={<MovieDetails />} />}
+        <Route path="/about" element={<AboutUs />} />
         <Route path="/forgotPassword" element={<ForgotPasswordOption />} />
         <Route path="/resetPassword/:token" element={<ResetPasswordOption />} />
       </Routes>
     </Router>
+  </>
   );
 }
 
