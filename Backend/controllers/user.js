@@ -1,6 +1,6 @@
 const userModel = require('../models/user');
 const shortId = require('shortid');
-const ErrorHandler = require('../utils/errorhandler');
+const ErrorHandler = require('../utils/ErrorHandler');
 const catchAsyncError = require('../middleware/asyncError');
 const sendToken = require('../utils/jwtToken');
 const sendEmail = require('../utils/sendEmail.js');
