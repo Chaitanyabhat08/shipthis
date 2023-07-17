@@ -42,7 +42,8 @@ const Header = () => {
             <li className="nav-item active">
               {isAuthenticated ? (
                 <a className="nav-link" href="/profile">
-                  {user.name}
+                    {user.name}
+                    <img src={user.avatar.url} alt="avatar" style={{ width: '50px', height: '50px', borderRadius: '50%' }} />
                 </a>
               ) : (
                   <a className="nav-link active" href="/signin">

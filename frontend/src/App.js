@@ -13,6 +13,7 @@ import ForgotPasswordOption from './components/User/ForgotPasswordOption.js';
 import ResetPasswordOption from './components/User/ResetPasswordOption.js';
 import Header from './components/layout/Header/Header.js';
 import AboutUs from './components/User/AboutUs.js';
+import Profile from './components/User/Profile.js';
 function App() {
   useEffect(() => {
     WebFont.load({
@@ -34,6 +35,7 @@ function App() {
         {user && isAuthenticated && <Route path="/allMovies" element={<AllMovies />} />}
         {user && isAuthenticated && <Route path="/allMovies/:keyWord" element={<AllMovies />} />}
         {user && isAuthenticated && <Route path="/movies/:id" element={<MovieDetails />} />}
+        {user && isAuthenticated && <Route path="/profile" element={<Profile />}/>}
         <Route path="/about" element={<AboutUs />} />
         <Route path="/forgotPassword" element={<ForgotPasswordOption />} />
         <Route path="/resetPassword/:token" element={<ResetPasswordOption />} />
