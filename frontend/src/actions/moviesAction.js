@@ -8,6 +8,7 @@ export const getMovies = (keyWord = "", currentPage = 1,category = "All", age) =
     const { data } = await axios.get(`/api/v1/movies/allmovies?keyWord=${keyWord}&page=${currentPage}&category=${category}&age=${age}`);
     dispatch({ type: MOVIES_SUCCESS, payload: data});
   } catch (error) {
+    console.log("thsiis", error);
     dispatch({ type: MOVIES_FAILURE, payload: error.response.data.message });
   }
 }

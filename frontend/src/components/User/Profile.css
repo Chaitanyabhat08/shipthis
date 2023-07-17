@@ -70,10 +70,6 @@
     font:400 1vmax "Montessarat";
     margin:0.2vmax;
 }
-input{
-    display: flex;
-    align-items: flex-start;
-}
 .profileContainer>.buttonSet{
     border:none;
     background-color: grey;

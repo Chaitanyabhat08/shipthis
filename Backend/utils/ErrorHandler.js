@@ -4,6 +4,11 @@ class ErrorHandler extends Error {
     this.statusCode = statusCode;
     Error.captureStackTrace(this, this.constructor);
   }
-}
 
+  toJSON() {
+    return {
+      message: this.message,
+    };
+  }
+}
 module.exports = ErrorHandler;

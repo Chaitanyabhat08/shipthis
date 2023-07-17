@@ -27,6 +27,7 @@ import {
   RESET_PASSWORD_FAILURE,
 } from "../constants/userConstants"
 export const userReducer = (state = { user: {} }, action) => {
+  console.log(action.payload);
   switch (action.type) {
     case LOGIN_REQUEST:
     case REGISTER_USER_REQUEST:

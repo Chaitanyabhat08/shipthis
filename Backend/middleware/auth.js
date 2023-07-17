@@ -1,4 +1,3 @@
-const ErrorHandler = require('../utils/ErrorHandler');
 const catchAsyncError = require('./asyncError');
 const jwt = require('jsonwebtoken');
 const { config } = require('dotenv');
@@ -13,7 +12,7 @@ if (result.error) {
 module.exports.isAuthenticatedUser = catchAsyncError(async (req, res, next) => {
   const { token } = req.cookies;
   if (!token) {
-    return next(new ErrorHandler("Please login or signup to access this page"));
+    return res.status(401).json({ message: "Please login or signup to access that page" });
   }
   const decodedData = jwt.verify(token, process.env.JWT_SECRET_KEY);
   req.user = await userModel.findById(decodedData.id);

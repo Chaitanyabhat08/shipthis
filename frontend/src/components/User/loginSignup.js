@@ -1,41 +1,3 @@
-// import { LockOpen, MailOutline } from '@material-ui/icons';
-// import FaceIcon from '@mui/icons-material/Face';
-// import React, { Fragment, useRef, useState, useEffect } from 'react';
-// import "./loginSignup.css";
-// import Loader from "../layout/Loader/Loader";
-// import { Link } from "react-router-dom";
-// import { useDispatch, useSelector } from 'react-redux';
-// import { useNavigate, useLocation } from "react-router-dom";
-// import { clearErrors, Login, Register } from '../../actions/userAction';
-// import { useAlert } from 'react-alert';
-// import MetaData from '../layout/MetaData';
-// const LoginSignup = () => {
-// const dispatch = useDispatch();
-// const alert = useAlert();
-// const navigateTo = useNavigate();
-//   const location = useLocation();
-//   const { error, loading, isAuthenticated } = useSelector(state => state.user);
-//   const loginTab = useRef(null);
-//   const registerTab = useRef(null);
-//   const [loginEmail, setLoginEmail] = useState(null);
-//   const [loginPassword, setLoginPassword] = useState(null);
-//   const [user, setUser] = useState({
-//     name: "",
-//     email: "",
-//     password: "",
-//   })
-
-//   const redirect = location.search ? location.search.split("=")[1] : "/users/getMyDetails";
-//   useEffect(() => {
-//     if (error) {
-//       alert.show(error);
-//       dispatchEvent(clearErrors());
-//     }
-//     if (user && isAuthenticated) {
-//       navigateTo(redirect)
-//     }
-//   }, [dispatch, alert, error, navigateTo, user, isAuthenticated, redirect]);
-
 import React, { Fragment, useRef, useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import MetaData from '../layout/MetaData';
@@ -44,9 +6,11 @@ import { useNavigate } from "react-router-dom";
 import { clearErrors, Login, Register } from '../../actions/userAction';
 import './loginSignup.css';
 import Loader from '../layout/Loader';
+import { useAlert } from 'react-alert';
 
 const LoginSignup = () => {
   const dispatch = useDispatch();
+  const alert = useAlert();
   const { error, loading, isAuthenticated } = useSelector(state => state.user);
   const navigateTo = useNavigate();
   const loginTab = useRef(null);
@@ -68,12 +32,12 @@ const LoginSignup = () => {
   useEffect(() => {
     if (error) {
       alert.show(error);
-      dispatchEvent(clearErrors());
+      dispatch(clearErrors());
     }
     if (user && isAuthenticated) {
       navigateTo(redirect)
     }
-  }, [dispatch, error, navigateTo, user, isAuthenticated, redirect]);
+  }, [dispatch, error, navigateTo, alert, user, isAuthenticated, redirect]);
 
   const registerDataChange = (e) => {
     if (e.target.name === "avatar") {
@@ -90,12 +54,12 @@ const LoginSignup = () => {
     }
   }
 
-  const loginSubmit = async (e) => {
+  const loginSubmit = (e) => {
     e.preventDefault();
-    await dispatch(Login(loginEmail, loginPassword));
+    dispatch(Login(loginEmail, loginPassword));
   };
 
-  const registerSubmit = async (e) => {
+  const registerSubmit = (e) => {
     e.preventDefault();
     const userData = {
       age: age.toString(),
@@ -104,7 +68,7 @@ const LoginSignup = () => {
       password,
       avatar,
     };
-    await dispatch(Register(userData));
+    dispatch(Register(userData));
   };
 
   return (

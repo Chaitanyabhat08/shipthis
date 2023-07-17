@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/static/css/main.e8699df4.css",
-    "main.js": "/static/js/main.695bf2fd.js",
+    "main.css": "/static/css/main.c1acc9b8.css",
+    "main.js": "/static/js/main.a69cfab4.js",
     "static/media/taken-3-movie-banner-8k-ob.jpg": "/static/media/taken-3-movie-banner-8k-ob.0809f9e864aea4ecac39.jpg",
     "static/media/card.webp": "/static/media/card.17e98352152f40fe5690.webp",
     "index.html": "/index.html",
-    "main.e8699df4.css.map": "/static/css/main.e8699df4.css.map",
-    "main.695bf2fd.js.map": "/static/js/main.695bf2fd.js.map"
+    "main.c1acc9b8.css.map": "/static/css/main.c1acc9b8.css.map",
+    "main.a69cfab4.js.map": "/static/js/main.a69cfab4.js.map"
   },
   "entrypoints": [
-    "static/css/main.e8699df4.css",
-    "static/js/main.695bf2fd.js"
+    "static/css/main.c1acc9b8.css",
+    "static/js/main.a69cfab4.js"
   ]
 }
