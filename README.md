@@ -88,7 +88,7 @@ These are just basic test case ideas to get you started. You can expand on them 
 
 ## Deployment
 
-- *Netlify*: Deployed the frontend on Netlify, and use a cloud-based MongoDB service for the backend.
+- *Render*: Deployed the monorepo on render, and it delivers frontend and backend on the same server.
 
 ## Code Repository
 
