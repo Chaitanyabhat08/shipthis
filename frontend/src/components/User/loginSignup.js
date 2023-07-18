@@ -133,7 +133,7 @@ const LoginSignup = () => {
             </div>
             <img className="avaImage" src={avatarPreview} alt="Avatar Preview" />
             <div id="registerImage" style={{ height: "auto", overflow: "scroll" }}>
-              <input type="file" name="avatar" accept="image/*" onChange={registerDataChange} />
+              <input type="file" name="avatar" accept="image/*" onChange={registerDataChange} required/>
             </div>
             <button type="submit" value="register" className="btn btn-primary">
               Sign up
